@@ -152,6 +152,7 @@
                         <span class="text-muted">
                   <%- comment.text %>
                 </span>
+                
                         <% if(currentUser && comment.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
                           <div class="float-right">
                             <a class="btn text-dark" data-toggle="collapse" data-target="#editComment" aria-expanded="false" aria-controls="editComment">
@@ -161,12 +162,6 @@
                               <button class="delBtn btn text-dark">
                         <i class="fas fa-trash-alt"></i>
                       </button>
-                      <button type="button" class="btn btn-success btn-sm" name="barter" id="barter" onclick="do_change(); return false;">
-                        Barter
-                    </button>
-                      <a href="https://barterchat.herokuapp.com/" id="chat" class="btn btn-dark btn-sm" style="display:none;">Barter with me!</a>
-                            </form>
-                          </div>
                           <div class="collapse" id="editComment">
                             <div class="card-body">
                               <form class="needs-validation" action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=PUT" method="POST" novalidate>
@@ -179,10 +174,20 @@
                                 <button type="submit" class="btn btn-dark btn-sm">Edit Comment</button>
                                 <button type="reset" class="btn btn-secondary btn-sm float right">Reset</button>
                               </form>
+                              
+                              
                             </div>
                           </div>
                           <% } %>
                       </li>
+                      <% if(currentUser && comment.author.id.equals(currentUser._id) || (currentUser && campground.author.id.equals(currentUser._id))) { %>
+                        <button type="button" class="btn btn-success btn-sm float right" name="barter" id="barter" onclick="do_change(); return false;">
+                          Barter
+                      </button>
+                        <a href="https://barterchat.herokuapp.com/" id="chat" class="btn btn-dark btn-sm" style="display:none;">Barter with me!</a>
+                              </form>
+                            </div>
+                            <% } %>
                       <% }) %>
             </ul>
           </div>
